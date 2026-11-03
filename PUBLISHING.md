@@ -1,7 +1,7 @@
 # Publication checklist - Chat Folder Click 2.1.0
 
 **Developer:** Mahdi Ghahremani  
-**GitHub:** https://github.com/TheLouisMahdi
+**GitHub:** https://github.com/TheLouisMahdi/chat-folder-click
 
 ## GitHub
 

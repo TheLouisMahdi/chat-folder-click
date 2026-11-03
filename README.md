@@ -20,7 +20,7 @@ Chat Folder Click lets you choose a directory on your computer, navigate its tre
 
 ## Install on Microsoft Edge (no command line)
 
-1. Download the project ZIP from GitHub (after the repository is published) and **Extract All**.
+1. Download the project ZIP from [GitHub](https://github.com/TheLouisMahdi/chat-folder-click) via **Code > Download ZIP** and **Extract All**.
 2. Navigate to `edge://extensions`, enable **Developer mode**, and select **Load unpacked**.
 3. Select the **`extension` folder** (the folder containing `manifest.json`), not the repository root.
 4. Click the Chat Folder Click icon to open the side panel. Click **Choose folder**, select a directory, and grant permission.
