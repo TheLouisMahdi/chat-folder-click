@@ -5,12 +5,12 @@
 
 ## GitHub
 
-1. Follow [docs/CODEX_REPOSITORY_SETUP.md](docs/CODEX_REPOSITORY_SETUP.md) to create the public `chat-folder-click` repository under `TheLouisMahdi`.
+1. Work in the existing [TheLouisMahdi/chat-folder-click](https://github.com/TheLouisMahdi/chat-folder-click) repository. Follow the [maintainer handoff](docs/CODEX_REPOSITORY_SETUP.md); do not recreate it.
 2. Commit the source and documentation from the repository root. Exclude `dist/`, ZIP files, and duplicate unpacked release copies.
 3. Keep the existing [MIT license](LICENSE); do not add a second license.
 4. Check for credentials and sensitive data before pushing. None are required by this extension.
 5. Add screenshots and an accurate feature description. Do not claim native ChatGPT tool access or fully automatic file management.
-6. Run `npm run check` and `python scripts/package_edge.py`, then review CI. Create tag `v2.1.0` and a GitHub release only after the user confirms real Edge smoke tests and approves the release. See [docs/RELEASE.md](docs/RELEASE.md).
+6. Run `npm run check` and `python scripts/package_edge.py`, then review CI for the pushed commit. Prepare a **draft** v2.1.0 release targeting that commit and attach the extension ZIP. Publish the release and version tag only after the user confirms real Edge smoke tests and approves publication. See [docs/RELEASE.md](docs/RELEASE.md).
 
 ## Microsoft Edge Add-ons
 

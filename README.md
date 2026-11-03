@@ -20,13 +20,26 @@ Chat Folder Click lets you choose a directory on your computer, navigate its tre
 
 ## Install on Microsoft Edge (no command line)
 
-1. Download the project ZIP from [GitHub](https://github.com/TheLouisMahdi/chat-folder-click) via **Code > Download ZIP** and **Extract All**.
-2. Navigate to `edge://extensions`, enable **Developer mode**, and select **Load unpacked**.
-3. Select the **`extension` folder** (the folder containing `manifest.json`), not the repository root.
-4. Click the Chat Folder Click icon to open the side panel. Click **Choose folder**, select a directory, and grant permission.
-5. Switch between the **White**, **Black**, and **Terminal** themes as preferred.
+### From a release ZIP
 
-For screenshots, workflows, re-opening a folder and troubleshooting, see the [step-by-step user guide](docs/USAGE.md).
+1. Open [GitHub Releases](https://github.com/TheLouisMahdi/chat-folder-click/releases). Once v2.1.0 is published, download **`chat-folder-click-edge-v2.1.0.zip`** from its **Assets**. If no release is published yet, use the source ZIP steps below.
+2. Use **Extract All** on the ZIP. Keep the extracted folder in a permanent location; Edge loads the extension from it.
+3. In Edge, open `edge://extensions`, enable **Developer mode**, and select **Load unpacked**.
+4. Select the extracted folder containing **`manifest.json`** directly. The release ZIP has no inner `extension` folder. Do not select the ZIP itself.
+5. Open Edge's extensions menu and click **Chat Folder Click** to open the side panel. Pin its icon if desired.
+
+### From the source ZIP
+
+On the [repository page](https://github.com/TheLouisMahdi/chat-folder-click), choose **Code > Download ZIP** and **Extract All**. Follow steps 3–5 above, but select the **`extension` subfolder** inside the extracted repository. GitHub's **Source code (zip)** release download also uses this layout.
+
+## First use: open and edit a local file
+
+1. In the side panel, click **Choose folder**, select a local folder, and grant access. Start with a disposable folder containing a `notes.txt` file.
+2. In **Explorer**, expand folders and select a UTF-8 text file. Edit its contents, click **Review & save**, inspect the preview, and choose **Apply changes** to save to disk.
+3. Use **New file** / **New folder**, **Import files**, or **Download file** as needed. Use **Choose folder** again to switch workspaces, or **Grant access** if Edge asks to reopen a remembered folder.
+4. Choose **White**, **Black**, or **Terminal** in the header. Keep a backup of important files; Undo is limited to recent changes while the panel stays open.
+
+For more workflows and troubleshooting, see the [step-by-step user guide](docs/USAGE.md).
 
 ## Working with ChatGPT (optional)
 
@@ -38,8 +51,8 @@ For screenshots, workflows, re-opening a folder and troubleshooting, see the [st
 {"bridge":"chat-folder-click","action":"read","path":"README.md"}
 ```
 
-4. If a **Review in folder** button appears below the model reply, select it. Otherwise paste the JSON into **Activity > Manual fallback**.
-5. Review and confirm the request. The extension reads or edits the selected folder. Use **Return to ChatGPT** to draft the actual result, then press **Send** yourself.
+4. Use a path that exists in your selected folder (for the example above, that folder must contain `README.md`). If **Review in folder** appears below the model reply, select it. Otherwise paste the JSON into **Activity > Manual fallback** and click **Queue JSON request**.
+5. Open **Activity**, check the pending path and action, then click **Review & execute** and confirm the operation. Check **Last operation** for the actual result. Use **Return to ChatGPT** to draft it in the conversation, then press **Send** yourself.
 
 **Important:** The model does not directly access your disk. The extension performs approved operations and passes results through the webpage. Never assume a model-suggested change was applied until the extension confirms it.
 
@@ -74,7 +87,7 @@ Source: [`extension/`](extension/) · Tests: [`tests/`](tests/) · Dev guide: [d
 
 ## Publishing
 
-See [docs/RELEASE.md](docs/RELEASE.md) for an Edge Add-ons submission checklist and [docs/CODEX_REPOSITORY_SETUP.md](docs/CODEX_REPOSITORY_SETUP.md) for Codex instructions to create the GitHub repository. The public storefront release and real Edge acceptance are **not yet verified**.
+See [docs/RELEASE.md](docs/RELEASE.md) for draft release preparation, manual Edge checks, and the Edge Add-ons submission checklist. [Maintainer handoff](docs/CODEX_REPOSITORY_SETUP.md) covers this existing repository. Real Edge smoke tests and Edge Add-ons approval are **not yet verified**; draft releases remain pending maintainer approval.
 
 ## License
 

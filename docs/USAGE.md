@@ -2,10 +2,10 @@
 
 ## Install and select a workspace
 
-1. Download and extract the repository archive.
+1. Download `chat-folder-click-edge-v2.1.0.zip` from [GitHub Releases](https://github.com/TheLouisMahdi/chat-folder-click/releases) once published and extract it to a permanent folder. If no release is published yet, use **Code > Download ZIP** on the repository page and extract the source archive instead.
 2. Open Microsoft Edge's `edge://extensions` page.
 3. Enable **Developer mode**, then choose **Load unpacked**.
-4. Select the `extension/` directory containing `manifest.json`.
+4. For the extension ZIP, select the extracted folder containing `manifest.json` directly. For the repository/source ZIP, select its `extension/` subfolder. Do not select the ZIP itself.
 5. Click the extension icon to open the side panel. If needed, pin the icon from Edge's extension menu.
 6. Select **Choose folder**, pick a local directory, and grant access in the browser prompt.
 

@@ -1,32 +1,22 @@
-# Codex handoff: create the GitHub repository
+# Codex handoff: maintain the existing repository
 
-Copy the instruction below into Codex and point it at the extracted `chat-folder-click/` directory. This package includes the complete repository source. **Do not regenerate or replace extension functionality just to create the repository.**
+The public repository already exists at [TheLouisMahdi/chat-folder-click](https://github.com/TheLouisMahdi/chat-folder-click), with source, documentation, an MIT license, and CI. This file replaces the original one-time repository creation instructions. Do not initialize or recreate the repository, replace its history, or add a second license.
 
----
+## Review and update
 
-## Task
+1. Check GitHub authentication and repository permissions. Inspect the working tree, fetch `origin/main`, and reconcile any local or remote changes before editing. Use normal commits and pushes; never force-push.
+2. Read the existing source, `package.json`, `extension/manifest.json`, tests, and CI. Preserve working functionality and avoid unrelated refactoring or dependencies. Both versions are currently `2.1.0`; the extension homepage already points to this repository.
+3. Before changing files, run `npm run check` with Node.js 20+ and `python scripts/package_edge.py` with Python 3. No dependency installation is needed. Verify ZIP integrity, that `manifest.json` is at its root, and that its entries match `extension/` exactly.
+4. Make only the requested source or documentation improvements. Keep English and Persian installation steps aligned, distinguishing the extension-only ZIP from GitHub's source ZIP.
+5. Review the diff and tracked files for credentials, personal paths, private keys, browser profiles, and unintended files. Keep `dist/`, ZIP files, and duplicate unpacked release copies out of Git.
+6. Run the relevant checks after changes, commit and push to `main` when authorized, and verify CI for the pushed commit.
 
-Create a clean, public GitHub repository under the authenticated account `TheLouisMahdi` for the existing **Chat Folder Click** Microsoft Edge extension.
+## Prepare a release for approval
 
-- Target repository name: `chat-folder-click`
-- Default branch: `main`
-- Description: `Local folder explorer and editor for Edge with optional user-approved ChatGPT integration.`
-- Suggested topics: `microsoft-edge`, `browser-extension`, `manifest-v3`, `file-system-access-api`, `chatgpt`, `javascript`, `open-source`
-- License: MIT, **already present in `LICENSE`**. Do not add a second license.
-- Initial version: `2.1.0` (already in `extension/manifest.json` and `package.json`).
+Follow [RELEASE.md](RELEASE.md). When asked to prepare a release, create or update a **draft** for the requested version, targeting the exact reviewed commit. Attach `dist/chat-folder-click-edge-v2.1.0.zip`, include installation instructions and verification results, and state which manual Edge checks remain.
 
-## Required steps
+Creating a draft is not approval to publish it. Keep the release unpublished and do not publish a version tag or submit to Edge Add-ons until the user confirms real Edge smoke tests and approves the release. Do not report automated checks as manual browser test results.
 
-1. Inspect the extracted directory and ensure repository root contains `README.md`, `LICENSE`, `extension/`, `tests/`, `.github/`, and `docs/`.
-2. Review `.gitignore` and scan all tracked files for accidental credentials, tokens and personal paths. Do not commit `dist/`, ZIP files, browser profiles or private keys. Treat unusual files as potential secrets.
-3. Run `npm run check` (Node.js >= 20) and `python scripts/package_edge.py` (Python 3). Verify the Edge ZIP includes `manifest.json` at its root. Do not present unsupported Edge UI/manual tests as passed.
-4. Check GitHub CLI authentication (`gh auth status`). If authentication or permission is missing, stop before remote operations and request user login. Do not embed tokens.
-5. Determine whether `TheLouisMahdi/chat-folder-click` exists. If it **already exists**, do not overwrite history or push without reconciling existing changes with the user.
-6. If it does not exist and permissions allow, initialize a new Git repository using `main`, commit the existing source/doc files with a clear message, and create the **public** GitHub repository. Push only the intended source branch. Do not force-push.
-7. Set the repository description and topics. Confirm MIT is detected by GitHub and the README renders correctly. Check CI status.
-8. Change `homepage_url` in `extension/manifest.json` to the new repository's verified HTTPS URL **only after the repository exists**. Re-run checks and commit/push the adjustment. Update documentation if needed; do not invent a repository URL in advance.
-9. Do **not** tag `v2.1.0` or submit to Edge Add-ons until the user has confirmed real Edge smoke tests and reviewed the release. Prepare the release artifacts, summarize how to publish, and ask for the final release go-ahead.
+## Report
 
-## Final report
-
-Report: exact repository URL, branch, commit hash, public visibility, detected license, topics, test results, CI status, packaging outcome, and remaining manual verification. Explicitly state any missing permissions or incomplete steps. Avoid edits unrelated to release preparation.
+Report the pushed commit, CI status, draft release URL, attached package verification, and any remaining manual checks or missing permissions.
