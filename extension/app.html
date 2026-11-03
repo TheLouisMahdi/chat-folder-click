@@ -1,0 +1,74 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Folder Click</title>
+  <link rel="stylesheet" href="app.css">
+</head>
+<body data-theme="black">
+  <div class="shell">
+    <header class="topbar">
+      <div class="brand"><span class="brand-icon" data-icon="tree"></span><span><strong>Folder Click</strong><small>LOCAL WORKSPACE</small></span></div>
+      <div class="top-controls">
+        <span id="status" class="status">No folder</span>
+        <div class="themes" role="group" aria-label="Color theme">
+          <button data-theme-choice="white" title="White theme">White</button>
+          <button data-theme-choice="black" title="Black theme">Black</button>
+          <button data-theme-choice="terminal" title="Terminal theme">Terminal</button>
+        </div>
+      </div>
+    </header>
+
+    <section class="project-head">
+      <div class="project-copy"><span class="eyebrow">WORKSPACE</span><h1 id="projectTitle">Choose a local folder</h1><p id="folderName">Choose a folder to begin.</p></div>
+      <div class="project-actions"><button class="button primary" id="choose"><span data-icon="folder"></span>Choose folder</button><button class="button" id="reconnect" hidden>Grant access</button><button class="button icon-button" id="refresh" title="Refresh explorer" aria-label="Refresh explorer"><span data-icon="refresh"></span></button></div>
+    </section>
+
+    <nav class="tabs" aria-label="Workspace sections">
+      <button data-tab="files" class="active">Explorer</button><button data-tab="chat">Chat link</button><button data-tab="activity">Activity <span id="pendingCount" class="count" hidden>1</span></button>
+    </nav>
+
+    <main>
+      <section id="filesTab" class="tab-page">
+        <div class="explorer-layout">
+          <section class="pane explorer-pane">
+            <div class="pane-head"><div><span class="eyebrow">FILES & FOLDERS</span><h2>Explorer</h2></div><div class="mini-actions"><button class="button icon-button" id="newFolder" title="New folder" aria-label="New folder"><span data-icon="folder-plus"></span></button><button class="button icon-button" id="newFile" title="New file" aria-label="New file"><span data-icon="file-plus"></span></button></div></div>
+            <div class="searchline"><span data-icon="search"></span><input id="filter" type="search" placeholder="Filter loaded files" aria-label="Filter files"></div>
+            <div class="row compact-row"><button class="link-button" id="scan">Search entire project</button><span id="treeInfo" class="meta">Select a folder</span></div>
+            <div id="tree" class="tree" role="tree"><div class="empty">Choose a folder to view its files.</div></div>
+            <div class="file-operations"><span class="meta" id="selectionText">No selection</span><div class="mini-actions"><button id="rename" class="button tiny" disabled>Rename</button><button id="move" class="button tiny" disabled>Move</button><button id="delete" class="button tiny danger" disabled>Delete</button></div></div>
+          </section>
+          <section class="pane editor-pane">
+            <div class="pane-head"><div><span class="eyebrow">FILE EDITOR</span><h2 id="currentPath">No file selected</h2></div><span id="fileSize" class="meta"></span></div>
+            <textarea id="content" spellcheck="false" placeholder="Choose a text file in the explorer." aria-label="File editor" disabled></textarea>
+            <div class="editor-foot"><span class="meta" id="dirtyText">Changes will be reviewed before saving.</span><div class="mini-actions"><button class="button" id="revert" disabled>Revert</button><button class="button primary" id="save" disabled>Review & save</button></div></div>
+            <div class="divider"></div>
+            <span class="eyebrow">TRANSFER</span>
+            <div class="actions-wrap"><button class="button" id="attach" disabled><span data-icon="upload"></span>Attach to ChatGPT</button><button class="button" id="send" disabled><span data-icon="message"></span>Send text</button><button class="button" id="exportFile" disabled><span data-icon="download"></span>Download file</button><button class="button" id="importFiles"><span data-icon="plus"></span>Import files</button><input id="filePicker" type="file" multiple hidden></div>
+          </section>
+        </div>
+      </section>
+
+      <section id="chatTab" class="tab-page" hidden>
+        <div class="two-col">
+          <section class="pane"><span class="eyebrow">CHATGPT BRIDGE</span><h2>Work with your folder.</h2><p>Connect a conversation and review file requests.</p><div class="actions-wrap"><button class="button primary" id="connect">Prepare ChatGPT</button><button class="button" id="sendTree">Share file tree</button></div><details class="connection-details"><summary>How this works</summary><p>ChatGPT does not receive direct access to your files. The extension passes requested data between the chat and your selected folder, with your approval. ChatGPT website updates may affect attachment and draft features.</p></details></section>
+          <section class="pane"><span class="eyebrow">PREFERENCES</span><h2>Permissions & privacy</h2><label class="setting"><span><strong>Auto-queue read requests</strong><small>Queue detected read/list actions, with manual execution.</small></span><input type="checkbox" id="autoRead"></label><label class="setting"><span><strong>Prepare results in ChatGPT</strong><small>Draft file contents after a successful request, without pressing Send.</small></span><input type="checkbox" id="autoReturn"></label><label class="setting"><span><strong>Show hidden items</strong><small>Show dotfiles in explorer (protected .git and dependency folders stay excluded).</small></span><input type="checkbox" id="showHidden"></label></section>
+        </div>
+      </section>
+
+      <section id="activityTab" class="tab-page" hidden>
+        <div class="two-col">
+          <section class="pane"><span class="eyebrow">MODEL ACTIONS</span><h2>Review before applying.</h2><div id="pendingText" class="callout">No pending model action.</div><pre id="preview" class="json-preview" hidden></pre><div class="actions-wrap"><button class="button primary" id="apply" disabled>Review & execute</button><button class="button" id="dismiss" disabled>Dismiss</button></div><div class="divider"></div><span class="eyebrow">MANUAL FALLBACK</span><p>Paste a request if automatic detection is unavailable.</p><textarea id="manualRequest" class="request-text" placeholder='{"bridge":"chat-folder-click","action":"read","path":"README.md"}'></textarea><button class="button" id="queueManual">Queue JSON request</button></section>
+          <section class="pane"><span class="eyebrow">RESULT</span><h2>Last operation</h2><pre id="result" class="result">No actions yet.</pre><div class="actions-wrap"><button class="button" id="returnResult" disabled>Return to ChatGPT</button><button class="button" id="copyResult" disabled>Copy result</button><button class="button" id="undo" disabled>Undo last change</button></div><p class="meta">Undo is available while this panel stays open.</p></section>
+        </div>
+      </section>
+    </main>
+    <div id="toast" role="status" aria-live="polite"></div>
+    <footer class="site-footer" aria-label="Creator"><span>Created by <strong>Mahdi Ghahremani</strong></span><a href="https://github.com/TheLouisMahdi" target="_blank" rel="noopener noreferrer" aria-label="Mahdi Ghahremani on GitHub">github.com/TheLouisMahdi</a></footer>
+  </div>
+
+  <dialog id="dialog"><div class="dialog-body"><span id="dialogEyebrow" class="eyebrow">CONFIRM</span><h2 id="dialogTitle"></h2><p id="dialogDescription"></p><input id="dialogInput" type="text" hidden><div id="diffView" class="diff" hidden><div><span>BEFORE</span><pre id="diffBefore"></pre></div><div><span>AFTER</span><pre id="diffAfter"></pre></div></div><div class="dialog-actions"><button class="button" id="dialogCancel">Cancel</button><button class="button primary" id="dialogConfirm">Confirm</button></div></div></dialog>
+  <script src="core.js"></script><script src="app.js"></script>
+</body>
+</html>

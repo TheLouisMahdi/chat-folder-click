@@ -1,0 +1,25 @@
+# Build output and release archives
+/dist/
+*.zip
+*.crx
+*.crx3
+# Duplicate unpacked release copy; source lives in extension/
+/chat-folder-click-v2.1-edge (1)/
+
+# Editor and OS files
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+*.log
+
+# Tooling and local-only data
+node_modules/
+__pycache__/
+.pytest_cache/
+.env
+.env.*
+*.pem
+*.key
+*.p12
+*.pfx
